@@ -140,6 +140,7 @@ jmetal-problem/*.iml
 FUN*
 VAR*
 coverage
+*.iml
 *Backup
 
 .RData
