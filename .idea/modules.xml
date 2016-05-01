@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/COS710Assignment3.iml" filepath="$PROJECT_DIR$/COS710Assignment3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Main.iml" filepath="$PROJECT_DIR$/Main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jmetal.iml" filepath="$PROJECT_DIR$/jmetal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jmetal-algorithm/jmetal-algorithm.iml" filepath="$PROJECT_DIR$/jmetal-algorithm/jmetal-algorithm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jmetal-core/jmetal-core.iml" filepath="$PROJECT_DIR$/jmetal-core/jmetal-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jmetal-exec/jmetal-exec.iml" filepath="$PROJECT_DIR$/jmetal-exec/jmetal-exec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jmetal-problem/jmetal-problem.iml" filepath="$PROJECT_DIR$/jmetal-problem/jmetal-problem.iml" />
     </modules>
   </component>
 </project>
