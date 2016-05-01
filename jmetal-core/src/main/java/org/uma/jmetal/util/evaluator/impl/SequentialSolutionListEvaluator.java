@@ -22,6 +22,7 @@ import org.uma.jmetal.util.JMetalLogger;
 import org.uma.jmetal.util.evaluator.SolutionListEvaluator;
 
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 
 /**

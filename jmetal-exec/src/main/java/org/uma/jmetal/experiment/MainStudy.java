@@ -45,8 +45,9 @@ public class MainStudy {
         }
         String experimentBaseDirectory = args[0] ;
         List<Problem<DoubleSolution>> problemList = null;
+        int objectiveFuncttions = 6;
         try {
-            problemList = Arrays.<Problem<DoubleSolution>>asList(new DTLZ1(20, 4), new DTLZ2(20, 4), new DTLZ3(20, 4), new WFG6(20, 20, 4),new WFG7(20, 20, 4),new DTLZ2M(20, 4));
+            problemList = Arrays.<Problem<DoubleSolution>>asList(new DTLZ1(20, objectiveFuncttions), new DTLZ2(20, objectiveFuncttions), new DTLZ3(20, objectiveFuncttions), new WFG6(20, 20, objectiveFuncttions),new WFG7(20, 20, objectiveFuncttions),new DTLZ2M(20, objectiveFuncttions));
         }catch(Exception ex)
         {
 
@@ -104,7 +105,7 @@ public class MainStudy {
                         .build();
                 algorithms.add(new TaggedAlgorithm<List<DoubleSolution>>(algorithm, "NSGAII", problemList.get(i), run));
             }
-
+            /*
             for (int i = 0; i < problemList.size(); i++) {
                 Algorithm<List<DoubleSolution>> algorithm = new PAESBuilder<>(problemList.get(i))
                         .setArchiveSize(1000)
@@ -114,7 +115,7 @@ public class MainStudy {
                         .build();
                 algorithms.add(new TaggedAlgorithm<List<DoubleSolution>>(algorithm, "PAES", problemList.get(i), run));
             }
-            /*
+
             for (int i = 0; i < problemList.size(); i++) {
                 Algorithm<List<DoubleSolution>> algorithm = new MOEADBuilder(problemList.get(i),MOEAD)
                         .setMaxEvaluations(25000)

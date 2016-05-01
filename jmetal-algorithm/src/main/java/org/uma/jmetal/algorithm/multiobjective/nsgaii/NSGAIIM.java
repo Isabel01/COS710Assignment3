@@ -21,7 +21,7 @@ import java.util.List;
  * @author Antonio J. Nebro <antonio@lcc.uma.es>
  */
 @SuppressWarnings("serial")
-public class NSGAII<S extends Solution<?>> extends AbstractGeneticAlgorithm<S, List<S>> {
+public class NSGAIIM<S extends Solution<?>> extends AbstractGeneticAlgorithm<S, List<S>> {
   protected final int maxEvaluations;
 
   protected final SolutionListEvaluator<S> evaluator;
@@ -31,9 +31,9 @@ public class NSGAII<S extends Solution<?>> extends AbstractGeneticAlgorithm<S, L
   /**
    * Constructor
    */
-  public NSGAII(Problem<S> problem, int maxEvaluations, int populationSize,
-      CrossoverOperator<S> crossoverOperator, MutationOperator<S> mutationOperator,
-      SelectionOperator<List<S>, S> selectionOperator, SolutionListEvaluator<S> evaluator) {
+  public NSGAIIM(Problem<S> problem, int maxEvaluations, int populationSize,
+                 CrossoverOperator<S> crossoverOperator, MutationOperator<S> mutationOperator,
+                 SelectionOperator<List<S>, S> selectionOperator, SolutionListEvaluator<S> evaluator) {
     super(problem);
     this.maxEvaluations = maxEvaluations;
     setMaxPopulationSize(populationSize);
