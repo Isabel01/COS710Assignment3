@@ -115,7 +115,7 @@ public class PAES<S extends Solution<?>> extends AbstractEvolutionStrategy<S, Li
   @Override protected List<S> replacement(List<S> population, List<S> offspringPopulation) {
     S current = population.get(0);
     S mutatedSolution = offspringPopulation.get(0);
-
+    //Here
     int flag = comparator.compare(current, mutatedSolution);
     if (flag == 1) {
       current = (S)mutatedSolution.copy();

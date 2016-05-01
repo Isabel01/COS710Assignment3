@@ -45,7 +45,7 @@ public class MainStudy {
         }
         String experimentBaseDirectory = args[0] ;
         List<Problem<DoubleSolution>> problemList = null;
-        int objectiveFuncttions = 6;
+        int objectiveFuncttions = 4;
         try {
             problemList = Arrays.<Problem<DoubleSolution>>asList(new DTLZ1(20, objectiveFuncttions), new DTLZ2(20, objectiveFuncttions), new DTLZ3(20, objectiveFuncttions), new WFG6(20, 20, objectiveFuncttions),new WFG7(20, 20, objectiveFuncttions),new DTLZ2M(20, objectiveFuncttions));
         }catch(Exception ex)

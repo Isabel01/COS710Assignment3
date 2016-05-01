@@ -80,7 +80,6 @@ public class NSGAII<S extends Solution<?>> extends AbstractGeneticAlgorithm<S, L
   }
 
   protected Ranking<S> computeRanking(List<S> solutionList) {
-
     Ranking<S> ranking = new DominanceRanking<S>();
     ranking.computeRanking(solutionList);
 
@@ -88,6 +87,7 @@ public class NSGAII<S extends Solution<?>> extends AbstractGeneticAlgorithm<S, L
   }
 
   protected List<S> crowdingDistanceSelection(Ranking<S> ranking) {
+
     CrowdingDistance<S> crowdingDistance = new CrowdingDistance<S>();
     List<S> population = new ArrayList<>(getMaxPopulationSize());
     int rankingIndex = 0;
