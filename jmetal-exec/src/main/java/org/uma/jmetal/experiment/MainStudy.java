@@ -96,31 +96,32 @@ public class MainStudy {
         List<TaggedAlgorithm<List<DoubleSolution>>> algorithms = new ArrayList<>() ;
 
         for (int run = 0; run < independentRuns; run++) {
-
+            // Paramaters are set from
             for (int i = 0; i < problemList.size(); i++) {
-                Algorithm<List<DoubleSolution>> algorithm = new NSGAIIBuilder<>(problemList.get(i), new SBXCrossover(1.0, 5),
+                Algorithm<List<DoubleSolution>> algorithm = new NSGAIIBuilder<>(problemList.get(i), new SBXCrossover(0.8, 5),
                         new PolynomialMutation(1.0 / problemList.get(i).getNumberOfVariables(), 10.0))
                         .setMaxEvaluations(25000)
                         .setPopulationSize(100)
                         .build();
                 algorithms.add(new TaggedAlgorithm<List<DoubleSolution>>(algorithm, "NSGAII", problemList.get(i), run));
             }
-            /*
-            for (int i = 0; i < problemList.size(); i++) {
-                Algorithm<List<DoubleSolution>> algorithm = new PAESBuilder<>(problemList.get(i))
-                        .setArchiveSize(1000)
-                        .setBiSections(10)
-                        .setMaxEvaluations(25000)
-                        .setMutationOperator(new SimpleRandomMutation(10))
-                        .build();
-                algorithms.add(new TaggedAlgorithm<List<DoubleSolution>>(algorithm, "PAES", problemList.get(i), run));
-            }
+
 
             for (int i = 0; i < problemList.size(); i++) {
                 Algorithm<List<DoubleSolution>> algorithm = new MOEADBuilder(problemList.get(i),MOEAD)
                         .setMaxEvaluations(25000)
                         .build();
                 algorithms.add(new TaggedAlgorithm<List<DoubleSolution>>(algorithm, "MOEAD", problemList.get(i), run));
+            }
+/*
+            for (int i = 0; i < problemList.size(); i++) {
+                Algorithm<List<DoubleSolution>> algorithm = new PAESBuilder<>(problemList.get(i))
+                        .setArchiveSize(1000)
+                        .setBiSections(10)
+                        .setMaxEvaluations(25000)
+                        .setMutationOperator(new SimpleRandomMutation(1.0 / problemList.get(i).getNumberOfVariables()))
+                        .build();
+                algorithms.add(new TaggedAlgorithm<List<DoubleSolution>>(algorithm, "PAES", problemList.get(i), run));
             }
             */
 
