@@ -4,6 +4,7 @@ import org.uma.jmetal.algorithm.Algorithm;
 import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder;
 import org.uma.jmetal.algorithm.multiobjective.paes.PAESBuilder;
 import org.uma.jmetal.algorithm.multiobjective.moead.MOEADBuilder;
+import org.uma.jmetal.operator.impl.crossover.DifferentialEvolutionCrossover;
 import org.uma.jmetal.operator.impl.crossover.SBXCrossover;
 import org.uma.jmetal.operator.impl.mutation.PolynomialMutation;
 import org.uma.jmetal.operator.impl.mutation.SimpleRandomMutation;
@@ -32,6 +33,8 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.uma.jmetal.algorithm.multiobjective.moead.MOEADBuilder.Variant.MOEAD;
+import static org.uma.jmetal.algorithm.multiobjective.moead.MOEADBuilder.Variant.MOEADDRA;
+import static org.uma.jmetal.algorithm.multiobjective.moead.MOEADBuilder.Variant.MOEADSTM;
 
 /**
  * Created by Hanrich Potgieter on 2016-04-30.
@@ -48,6 +51,7 @@ public class MainStudy {
         int objectiveFuncttions = 4;
         try {
             problemList = Arrays.<Problem<DoubleSolution>>asList(new DTLZ1(20, objectiveFuncttions), new DTLZ2(20, objectiveFuncttions), new DTLZ3(20, objectiveFuncttions), new WFG6(20, 20, objectiveFuncttions),new WFG7(20, 20, objectiveFuncttions),new DTLZ2M(20, objectiveFuncttions));
+            //problemList = Arrays.<Problem<DoubleSolution>>asList(new DTLZ1(20, objectiveFuncttions),new DTLZ1(20, objectiveFuncttions+2),new DTLZ1(20, objectiveFuncttions+4),new DTLZ1(20, objectiveFuncttions+6));
         }catch(Exception ex)
         {
 
@@ -97,29 +101,30 @@ public class MainStudy {
 
         for (int run = 0; run < independentRuns; run++) {
             // Paramaters are set from
+            /*
             for (int i = 0; i < problemList.size(); i++) {
                 Algorithm<List<DoubleSolution>> algorithm = new NSGAIIBuilder<>(problemList.get(i), new SBXCrossover(0.8, 5),
                         new PolynomialMutation(1.0 / problemList.get(i).getNumberOfVariables(), 10.0))
-                        .setMaxEvaluations(25000)
+                        .setMaxEvaluations(5000)
                         .setPopulationSize(100)
                         .build();
                 algorithms.add(new TaggedAlgorithm<List<DoubleSolution>>(algorithm, "NSGAII", problemList.get(i), run));
             }
-
+            */
 
             for (int i = 0; i < problemList.size(); i++) {
                 Algorithm<List<DoubleSolution>> algorithm = new MOEADBuilder(problemList.get(i),MOEAD)
-                        .setMaxEvaluations(25000)
+                        .setMaxEvaluations(5000)
+                        .setResultPopulationSize(20)
+                        .setCrossover(new DifferentialEvolutionCrossover())
                         .build();
                 algorithms.add(new TaggedAlgorithm<List<DoubleSolution>>(algorithm, "MOEAD", problemList.get(i), run));
             }
-/*
+            /*
+
             for (int i = 0; i < problemList.size(); i++) {
                 Algorithm<List<DoubleSolution>> algorithm = new PAESBuilder<>(problemList.get(i))
-                        .setArchiveSize(1000)
-                        .setBiSections(10)
-                        .setMaxEvaluations(25000)
-                        .setMutationOperator(new SimpleRandomMutation(1.0 / problemList.get(i).getNumberOfVariables()))
+                        .setMaxEvaluations(5000)
                         .build();
                 algorithms.add(new TaggedAlgorithm<List<DoubleSolution>>(algorithm, "PAES", problemList.get(i), run));
             }
