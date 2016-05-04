@@ -33,8 +33,6 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.uma.jmetal.algorithm.multiobjective.moead.MOEADBuilder.Variant.MOEAD;
-import static org.uma.jmetal.algorithm.multiobjective.moead.MOEADBuilder.Variant.MOEADDRA;
-import static org.uma.jmetal.algorithm.multiobjective.moead.MOEADBuilder.Variant.MOEADSTM;
 
 /**
  * Created by Hanrich Potgieter on 2016-04-30.
@@ -48,7 +46,7 @@ public class MainStudy {
         }
         String experimentBaseDirectory = args[0] ;
         List<Problem<DoubleSolution>> problemList = null;
-        int objectiveFuncttions = 4;
+        int objectiveFuncttions = 2;
         try {
             problemList = Arrays.<Problem<DoubleSolution>>asList(new DTLZ1(20, objectiveFuncttions), new DTLZ2(20, objectiveFuncttions), new DTLZ3(20, objectiveFuncttions), new WFG6(20, 20, objectiveFuncttions),new WFG7(20, 20, objectiveFuncttions),new DTLZ2M(20, objectiveFuncttions));
             //problemList = Arrays.<Problem<DoubleSolution>>asList(new DTLZ1(20, objectiveFuncttions),new DTLZ1(20, objectiveFuncttions+2),new DTLZ1(20, objectiveFuncttions+4),new DTLZ1(20, objectiveFuncttions+6));
@@ -75,10 +73,12 @@ public class MainStudy {
                                 new PISAHypervolume<DoubleSolution>(),
                                 new InvertedGenerationalDistance<DoubleSolution>(), new InvertedGenerationalDistancePlus<DoubleSolution>()))
                         .setIndependentRuns(INDEPENDENT_RUNS)
-                        .setNumberOfCores(8)
+                        .setNumberOfCores(1)
                         .build();
 
         new ExecuteAlgorithms<>(experiment).run();
+
+        new GenerateReferenceParetoFront(experiment).run();
         new ComputeQualityIndicators<>(experiment).run() ;
         new GenerateLatexTablesWithStatistics(experiment).run() ;
         new GenerateWilcoxonTestTablesWithR<>(experiment).run() ;
@@ -101,7 +101,7 @@ public class MainStudy {
 
         for (int run = 0; run < independentRuns; run++) {
             // Paramaters are set from
-            /*
+
             for (int i = 0; i < problemList.size(); i++) {
                 Algorithm<List<DoubleSolution>> algorithm = new NSGAIIBuilder<>(problemList.get(i), new SBXCrossover(0.8, 5),
                         new PolynomialMutation(1.0 / problemList.get(i).getNumberOfVariables(), 10.0))
@@ -110,7 +110,7 @@ public class MainStudy {
                         .build();
                 algorithms.add(new TaggedAlgorithm<List<DoubleSolution>>(algorithm, "NSGAII", problemList.get(i), run));
             }
-            */
+
 
             for (int i = 0; i < problemList.size(); i++) {
                 Algorithm<List<DoubleSolution>> algorithm = new MOEADBuilder(problemList.get(i),MOEAD)
@@ -120,15 +120,17 @@ public class MainStudy {
                         .build();
                 algorithms.add(new TaggedAlgorithm<List<DoubleSolution>>(algorithm, "MOEAD", problemList.get(i), run));
             }
-            /*
+
 
             for (int i = 0; i < problemList.size(); i++) {
                 Algorithm<List<DoubleSolution>> algorithm = new PAESBuilder<>(problemList.get(i))
                         .setMaxEvaluations(5000)
+                        .setBiSections(3)
+                        .setMutationOperator(new PolynomialMutation())
                         .build();
                 algorithms.add(new TaggedAlgorithm<List<DoubleSolution>>(algorithm, "PAES", problemList.get(i), run));
             }
-            */
+
 
         }
         return algorithms ;
